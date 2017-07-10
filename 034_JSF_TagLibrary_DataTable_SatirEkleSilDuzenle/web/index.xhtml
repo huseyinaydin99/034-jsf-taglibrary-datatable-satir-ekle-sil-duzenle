@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body><center>
+            <h:form styleClass="form-inline">
+                <table>
+                    <tr><td>Adı ve Suyadi : </td><td><h:inputText styleClass="form-control" value="#{yonetimliBean.adiSoyadi}" /></td></tr>
+                    <tr><td>Maaşı : </td><td><h:inputText styleClass="form-control" value="#{yonetimliBean.maasi}" /></td></tr>
+                    <tr><td>Yaşı : </td><td><h:inputText styleClass="form-control" value="#{yonetimliBean.yasi}" /></td></tr>
+                    <tr><td>Numarası : </td><td><h:inputText styleClass="form-control" value="#{yonetimliBean.numarasi}" /></td></tr>
+                    <tr><td><h:commandButton styleClass="btn btn-success" style="margin:10px" value="Kaydet" action="#{yonetimliBean.kayitEkle()}" /></td><td><h:commandButton type="reset" styleClass="btn btn-success" value="Temizle" action="#{yonetimliBean.degisikligiKaydet()}" /></td></tr>
+                </table>
+                
+                <br />
+                <h:dataTable styleClass="table" value="#{yonetimliBean.personels}" var="p">
+                    <h:column>
+                        <h:graphicImage library="images" name="uye.png" />
+                        <f:facet name="header">Numarası</f:facet>
+                        <h:inputText value="#{p.numarasi}" rendered="#{p.duzenle}" />
+                        <h:outputText value="#{p.numarasi}" rendered="#{not p.duzenle}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Adı Soyadı</f:facet>
+                        <h:inputText value="#{p.adiSoyadi}" rendered="#{p.duzenle}" />
+                        <h:outputText value="#{p.adiSoyadi}" rendered="#{not p.duzenle}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Maaşı</f:facet>
+                        <h:inputText value="#{p.maasi}" rendered="#{p.duzenle}" />
+                        <h:outputText value="#{p.maasi}" rendered="#{not p.duzenle}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header"><h:graphicImage library="images" name="sil_liste.png" /></f:facet>
+                        <h:graphicImage library="images" name="sil.png" />
+                        <h:commandButton styleClass="btn btn-success" value="Sil" action="#{yonetimliBean.kayitSil(p)}" />
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header"><h:graphicImage library="images" name="sil_liste.png" /></f:facet>
+                        <h:graphicImage library="images" name="duzenle.png" rendered="#{not p.duzenle}" />
+                        <h:commandLink value="Düzenle" action="#{yonetimliBean.kayitDuzenle(p)}" rendered="#{not p.duzenle}" />
+                        
+                        <h:graphicImage library="images" name="onay.png" rendered="#{p.duzenle}" />
+                        <h:commandButton styleClass="btn btn-success" value="Düzenle" action="#{yonetimliBean.degisikligiKaydet()}" rendered="#{p.duzenle}" />
+                    </h:column>
+
+                </h:dataTable>
+            </h:form>
+        </center>
+    </h:body>
+</html>
+
